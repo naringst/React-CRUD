@@ -1,4 +1,5 @@
 import React from "react";
+import { styled } from "styled-components";
 
 export default function Button({
   title,
@@ -28,7 +29,7 @@ export default function Button({
   };
 
   const editingLists = () => {
-    //해당 id의 내용 수정 ???
+    //해당 id의 내용 수정
     const editObject = Lists.find((item) => item.id === id);
 
     editObject.price = price;
@@ -45,10 +46,19 @@ export default function Button({
   };
 
   if (title === "목록지우기") {
-    return <button onClick={deleteLists}>{title}</button>;
+    return <StyledButton onClick={deleteLists}>{title}</StyledButton>;
   } else if (title === "수정") {
-    return <button onClick={editingLists}>{title}</button>;
+    return <StyledButton onClick={editingLists}>{title}</StyledButton>;
   } else {
-    return <button onClick={storeLists}>{title}</button>;
+    return <StyledButton onClick={storeLists}>{title}</StyledButton>;
   }
 }
+
+const StyledButton = styled.button`
+  margin: 5px;
+  width: max-content;
+  height: 30px;
+  background: #d7d3f9;
+  border: none;
+  border-radius: 5px;
+`;

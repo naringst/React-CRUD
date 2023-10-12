@@ -5,7 +5,7 @@ import { styled } from "styled-components";
 export default function Input({ title, type, name, setter }) {
   return (
     <Div>
-      <h1>{title}</h1>
+      <Title>{title}</Title>
       <input
         type={type}
         value={name}
@@ -19,4 +19,8 @@ export default function Input({ title, type, name, setter }) {
 
 const Div = styled.div`
   margin: 5px 10px;
+`;
+
+const Title = styled.h1`
+  font-size: 18px;
 `;

@@ -20,8 +20,7 @@ function App() {
     Lists.forEach((item) => (total += Number(item.price)));
     return total;
   };
-  console.log(Lists);
-  console.log("eidit", editingId);
+
   return (
     <div className="App">
       {isSubmitted ? <div className="submitted">제출 완료</div> : null}
@@ -68,21 +67,23 @@ function App() {
             />
           )}
         </RowFlexDiv>
-        {Lists.map((item) => {
-          return (
-            <List
-              id={item.id}
-              category={item.category}
-              price={item.price}
-              setCategory={setCategory}
-              setPrice={setPrice}
-              Lists={Lists}
-              setLists={setLists}
-              setIsEdit={setIsEdit}
-              setEditingId={setEditingId}
-            />
-          );
-        })}
+        <div className="lists">
+          {Lists.map((item) => {
+            return (
+              <List
+                id={item.id}
+                category={item.category}
+                price={item.price}
+                setCategory={setCategory}
+                setPrice={setPrice}
+                Lists={Lists}
+                setLists={setLists}
+                setIsEdit={setIsEdit}
+                setEditingId={setEditingId}
+              />
+            );
+          })}
+        </div>
         <Button
           title="목록지우기"
           id={uuidv4()}
@@ -103,5 +104,6 @@ export default App;
 
 const RowFlexDiv = styled.div`
   display: flex;
-  justify-contents: space-between;
+  justify-content: center;
+  align-items: end;
 `;
