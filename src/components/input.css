@@ -1,0 +1,9 @@
+* {
+  font-size: 14px;
+  color: #6667ab;
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid #6667ab;
+}
