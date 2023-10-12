@@ -4,42 +4,91 @@ import Input from "./components/Input";
 import { styled } from "styled-components";
 import List from "./components/List";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
-  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
   const [price, setPrice] = useState(0);
+  const [Lists, setLists] = useState([]);
+  const [isEdit, setIsEdit] = useState(false);
+  const [editingId, setEditingId] = useState("");
 
-  const Lists = [
-    {
-      title: "식비",
-      price: 10000,
-    },
-    {
-      title: "식비",
-      price: 10000,
-    },
-  ];
-
-  const submitInput = () => {
-    console.log("Input");
+  const calcTotalPrice = () => {
+    let total = 0;
+    Lists.forEach((item) => (total += Number(item.price)));
+    return total;
   };
-
+  console.log(Lists);
+  console.log("eidit", editingId);
   return (
     <div className="App">
       <h1 className="main-title">예산 계산기</h1>
 
       <div className="container">
         <RowFlexDiv>
-          <Input title="지출항목" type="string" setTitle={setTitle} />
-          <Input title="비용" type="number" />
+          <Input
+            title="지출항목"
+            type="string"
+            name={category}
+            setter={setCategory}
+          />
+          <Input title="비용" type="number" name={price} setter={setPrice} />
+
+          {isEdit ? (
+            <Button
+              title="수정"
+              id={editingId}
+              setEditingId={setEditingId}
+              price={price}
+              category={category}
+              Lists={Lists}
+              setLists={setLists}
+              setCategory={setCategory}
+              setPrice={setPrice}
+              className="submitButton"
+              setIsEdit={setIsEdit}
+            />
+          ) : (
+            <Button
+              title="제출"
+              id={uuidv4()}
+              price={price}
+              category={category}
+              Lists={Lists}
+              setLists={setLists}
+              setCategory={setCategory}
+              setPrice={setPrice}
+              className="submitButton"
+            />
+          )}
         </RowFlexDiv>
-        <Button title="제출" onClick={submitInput} />
         {Lists.map((item) => {
-          return <List title={item.title} price={item.price} />;
+          return (
+            <List
+              id={item.id}
+              category={item.category}
+              price={item.price}
+              setCategory={setCategory}
+              setPrice={setPrice}
+              Lists={Lists}
+              setLists={setLists}
+              setIsEdit={setIsEdit}
+              setEditingId={setEditingId}
+            />
+          );
         })}
-        <Button title="목록 지우기" />
+        <Button
+          title="목록지우기"
+          id={uuidv4()}
+          price={price}
+          category={category}
+          Lists={Lists}
+          setLists={setLists}
+          className="deleteButton"
+        />
       </div>
-      <h2>총지출 : </h2>
+
+      <h2 className="total">총지출 : {calcTotalPrice()}원</h2>
     </div>
   );
 }
