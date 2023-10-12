@@ -12,6 +12,8 @@ function App() {
   const [Lists, setLists] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [editingId, setEditingId] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isEdittied, setIsEditted] = useState(false);
 
   const calcTotalPrice = () => {
     let total = 0;
@@ -22,6 +24,8 @@ function App() {
   console.log("eidit", editingId);
   return (
     <div className="App">
+      {isSubmitted ? <div className="submitted">제출 완료</div> : null}
+      {isEdittied ? <div className="editted">수정 완료</div> : null}
       <h1 className="main-title">예산 계산기</h1>
 
       <div className="container">
@@ -47,6 +51,7 @@ function App() {
               setPrice={setPrice}
               className="submitButton"
               setIsEdit={setIsEdit}
+              setIsEditted={setIsEditted}
             />
           ) : (
             <Button
@@ -59,6 +64,7 @@ function App() {
               setCategory={setCategory}
               setPrice={setPrice}
               className="submitButton"
+              setIsSubmitted={setIsSubmitted}
             />
           )}
         </RowFlexDiv>

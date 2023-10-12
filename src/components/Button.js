@@ -10,11 +10,17 @@ export default function Button({
   setCategory,
   setPrice,
   setIsEdit,
+  setIsEditted,
+  setIsSubmitted,
 }) {
   const storeLists = () => {
     setLists([...Lists, { id: id, price: price, category: category }]);
     setCategory("");
     setPrice(0);
+    setIsSubmitted(true);
+    setTimeout(() => {
+      setIsSubmitted(false);
+    }, 2000);
   };
 
   const deleteLists = () => {
@@ -32,6 +38,10 @@ export default function Button({
     setIsEdit(false);
     setCategory("");
     setPrice(0);
+    setIsEditted(true);
+    setTimeout(() => {
+      setIsEditted(false);
+    }, 2000);
   };
 
   if (title === "목록지우기") {
